@@ -96,6 +96,7 @@ Game Logic & Rendering
 # Build
 
 Clone the repository:
+```
 
 ```bash
 git clone https://github.com/ksero225/AcceleroSnake.git
