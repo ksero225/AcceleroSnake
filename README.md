@@ -92,3 +92,44 @@ ROS 2 Topic
 C++ Snake Subscriber Node
       ↓
 Game Logic & Rendering
+
+# Build
+
+Clone the repository:
+
+```bash
+git clone https://github.com/ksero225/AcceleroSnake.git
+cd AcceleroSnake
+```
+
+Build the ROS 2 workspace:
+
+```bash
+source /opt/ros/jazzy/setup.bash
+colcon build --packages-select snake
+source install/setup.bash
+```
+
+---
+
+# Run
+
+Start the Snake game:
+
+```bash
+ros2 run snake main
+```
+
+Future versions of the project will also require launching the IMU publisher node:
+
+```bash
+ros2 run imu_reader imu_publisher
+```
+
+---
+
+# License
+
+This project is licensed under the MIT License.
+
+You are free to use, modify, distribute, and learn from this project for personal and commercial purposes.
