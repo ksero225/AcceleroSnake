@@ -203,3 +203,15 @@ ros2 run imu_reader imu_direction_publisher
 ```
 
 After launching both nodes, tilt the BMI160 sensor to control the snake.
+
+---
+
+<img width="1135" height="553" alt="game" src="https://github.com/user-attachments/assets/55df73ab-ca01-4864-af9f-91417335cc31" />
+
+---
+
+<img width="2268" height="4032" alt="malina" src="https://github.com/user-attachments/assets/f6bec5ba-5e92-43c2-8304-767662c2e04e" />
+
+---
+
+<img width="2268" height="4032" alt="czujnik" src="https://github.com/user-attachments/assets/4ac64269-7ad4-4c84-bd74-fdc17e48d7dc" />
