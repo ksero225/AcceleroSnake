@@ -13,22 +13,24 @@ using namespace std::chrono_literals;
 
 Game::Game(int width, int height)
     : width(width), height(height),
+      playerPoints(0),
       headPosition{25, 10},
-      movementDirection(Direction::Right),
+      movementDirection(Direction::Up),
+      pendingDirection(Direction::Up),
       isGameOver(false)
 {
-    snakeBody.push_back({4, 5});
-    snakeBody.push_back({3, 5});
+    snakeBody.push_back({24, 10});
+    snakeBody.push_back({23, 10});
 }
 
 void Game::run()
 {
     generateRandomPosition();
-    int delayMs = 200;
+    int delayMs = 400;
     while (!isGameOver)
     {
-        delayMs = std::max(50, 200 - playerPoints * 5);
-        handleInput();
+        delayMs = std::max(50, 400 - playerPoints * 5);
+        //handleInput();
         update();
         render();
         if (movementDirection == Direction::Down ||
@@ -108,11 +110,11 @@ bool Game::isSnakeBodyPosition(int x, int y) const
 
 void Game::moveSnake()
 {
-    Direction currDirection = movementDirection;
+    movementDirection = pendingDirection;
 
     Position oldHeadPos = headPosition;
 
-    switch (currDirection)
+    switch (movementDirection)
     {
     case Direction::Up:
         headPosition.y--;
@@ -243,4 +245,12 @@ void Game::generateRandomPosition()
 
     pointPosition.x = randomX;
     pointPosition.y = randomY;
+}
+
+void Game::setDirection(Direction newDir)
+{
+    if (!isNewDirOppositeDirection(newDir, movementDirection))
+    {
+        pendingDirection = newDir;
+    }
 }
