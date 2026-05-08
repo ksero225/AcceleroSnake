@@ -210,8 +210,21 @@ After launching both nodes, tilt the BMI160 sensor to control the snake.
 
 ---
 
-| Raspberry Pi 5 setup | BMI160 IMU sensor |
-|---|---|
-| <img src="https://github.com/user-attachments/assets/f6bec5ba-5e92-43c2-8304-767662c2e04e" width="350"/> | <img src="https://github.com/user-attachments/assets/4ac64269-7ad4-4c84-bd74-fdc17e48d7dc" width="350"/> |
+<div align="center">
 
+<table>
+  <tr>
+    <th>Raspberry Pi 5 setup</th>
+    <th>BMI160 IMU sensor</th>
+  </tr>
+  <tr>
+    <td>
+      <img src="https://github.com/user-attachments/assets/f6bec5ba-5e92-43c2-8304-767662c2e04e" width="350"/>
+    </td>
+    <td>
+      <img src="https://github.com/user-attachments/assets/4ac64269-7ad4-4c84-bd74-fdc17e48d7dc" width="350"/>
+    </td>
+  </tr>
+</table>
 
+</div>
