@@ -210,8 +210,7 @@ After launching both nodes, tilt the BMI160 sensor to control the snake.
 
 ---
 
-<img width="2268" height="4032" alt="malina" src="https://github.com/user-attachments/assets/f6bec5ba-5e92-43c2-8304-767662c2e04e" />
-
----
-
-<img width="2268" height="4032" alt="czujnik" src="https://github.com/user-attachments/assets/4ac64269-7ad4-4c84-bd74-fdc17e48d7dc" />
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/f6bec5ba-5e92-43c2-8304-767662c2e04e" alt="Raspberry Pi 5 setup" width="350"/>
+  <img src="https://github.com/user-attachments/assets/4ac64269-7ad4-4c84-bd74-fdc17e48d7dc" alt="BMI160 sensor" width="350"/>
+</p>
