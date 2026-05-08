@@ -148,3 +148,58 @@ Expected address:
 ```
 
 If the detected address is different from the one used in the Python code, update the `BMI160_ADDR` value in the IMU publisher file.
+
+---
+
+# Build
+
+Clone the repository:
+
+```bash
+git clone https://github.com/ksero225/AcceleroSnake.git
+cd AcceleroSnake
+```
+
+Source ROS 2:
+
+```bash
+source /opt/ros/jazzy/setup.bash
+```
+
+Build all ROS 2 packages:
+
+```bash
+colcon build --symlink-install
+```
+
+Source the local workspace:
+
+```bash
+source install/setup.bash
+```
+
+---
+
+# Run
+
+The project should be run in two terminals.
+
+## Terminal 1 — Start the Snake game
+
+```bash
+cd AcceleroSnake
+source /opt/ros/jazzy/setup.bash
+source install/setup.bash
+ros2 run snake main
+```
+
+## Terminal 2 — Start the IMU direction publisher
+
+```bash
+cd AcceleroSnake
+source /opt/ros/jazzy/setup.bash
+source install/setup.bash
+ros2 run imu_reader imu_direction_publisher
+```
+
+After launching both nodes, tilt the BMI160 sensor to control the snake.
