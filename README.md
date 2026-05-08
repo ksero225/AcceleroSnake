@@ -2,135 +2,149 @@
 
 AcceleroSnake is a Snake game controlled by a real IMU sensor using ROS 2 communication on Raspberry Pi 5.
 
-The goal of the project is to combine:
+The project combines:
 - modern C++ development,
-- ROS 2 architecture,
+- ROS 2 publisher/subscriber architecture,
 - embedded systems,
-- sensor data processing,
-- and basic game development.
+- I2C sensor communication,
+- accelerometer-based input control,
+- and basic terminal game development.
 
-Instead of using a keyboard, the snake is controlled by physical movement and rotation of the sensor.
+Instead of using a keyboard, the snake is controlled by physically tilting the BMI160 IMU sensor.
+
+---
+
+# Project Status
+
+Current version:
+- BMI160 IMU sensor is read through I2C,
+- Python ROS 2 node publishes movement directions,
+- C++ Snake game subscribes to direction commands,
+- Snake can be controlled using physical IMU movement,
+- terminal-based rendering and score system are implemented.
+
+The current control mode uses accelerometer-based tilt detection.  
+The gyroscope is available for raw readings and may be used in future control modes.
 
 ---
 
 # Technologies
 
 ## Hardware
+
 - Raspberry Pi 5
-- Gravity BMI160 6DoF IMU
+- Gravity BMI160 6DoF IMU - DFRobot SEN0250
   - 3-axis accelerometer
   - 3-axis gyroscope
-  - DFRobot SEN0250
 
 ## Software
+
 - Ubuntu
 - ROS 2 Jazzy
 - C++
 - Python
+- I2C
+- colcon
 
 ---
 
 # Project Architecture
 
-The project is divided into two main parts.
+The project is divided into two ROS 2 packages:
 
-## 1. Sensor Node (Python)
+```text
+src/
+├── snake/          # C++ Snake game node
+└── imu_reader/     # Python BMI160 IMU reader and direction publisher
+```
 
-A ROS 2 publisher node written in Python is responsible for:
-- reading live data from the BMI160 sensor,
-- processing accelerometer and gyroscope values,
-- publishing movement data through ROS 2 topics.
+The `snake` package contains the C++ terminal Snake game.
 
-Python is used here because of the availability of sensor libraries and faster hardware integration.
-
----
-
-## 2. Game Node (C++)
-
-The Snake game itself is implemented in modern C++.
-
-The game node:
-- subscribes to ROS 2 sensor topics,
-- interprets movement direction,
-- updates game state,
-- renders the snake in terminal,
-- handles collisions and score system.
-
-The project focuses heavily on:
-- object-oriented programming,
-- game loop architecture,
-- vector-based body simulation,
-- terminal rendering,
-- real-time input handling.
-
----
-
-# Features
-
-- Snake controlled by IMU movement
-- ROS 2 publisher/subscriber architecture
-- Dynamic snake body growth
-- Collision detection
-- Random food generation
-- Difficulty scaling based on score
-- Non-blocking terminal input
-- Modular C++ architecture
+The `imu_reader` package contains Python nodes responsible for reading BMI160 sensor data and publishing movement directions through ROS 2 topics.
 
 ---
 
 # ROS 2 Communication
 
-Example architecture:
+The BMI160 sensor is read by a Python ROS 2 node.
+
+The node converts accelerometer values into movement directions and publishes them to a ROS 2 topic.
 
 ```text
 BMI160 Sensor
       ↓
-Python Publisher Node
+Python IMU Publisher Node
       ↓
-ROS 2 Topic
+/snake/direction
       ↓
-C++ Snake Subscriber Node
+C++ Snake Game Node
       ↓
-Game Logic & Rendering
-```
-# Build
-
-Clone the repository:
-
-
-```bash
-git clone https://github.com/ksero225/AcceleroSnake.git
-cd AcceleroSnake
-```
-
-Build the ROS 2 workspace:
-
-```bash
-source /opt/ros/jazzy/setup.bash
-colcon build --packages-select snake
-source install/setup.bash
+Game Logic & Terminal Rendering
 ```
 
 ---
 
-# Run
+## Topic
 
-Start the Snake game:
-
-```bash
-ros2 run snake main
+```text
+/snake/direction
 ```
 
-Future versions of the project will also require launching the IMU publisher node:
+## Message Type
 
-```bash
-ros2 run imu_reader imu_publisher
+```text
+std_msgs/msg/String
+```
+
+## Supported Values
+
+```text
+UP
+DOWN
+LEFT
+RIGHT
 ```
 
 ---
 
-# License
+# Features
 
-This project is licensed under the MIT License.
+- Snake controlled by BMI160 IMU movement
+- ROS 2 publisher/subscriber communication
+- Python sensor node
+- C++ game node
+- Terminal-based Snake rendering
+- Dynamic snake body growth
+- Random food generation
+- Collision detection
+- Score system
+- Difficulty scaling based on score
+- Non-blocking keyboard input support
+- Modular project structure
 
-You are free to use, modify, distribute, and learn from this project for personal and commercial purposes.
+- ---
+
+# Requirements
+
+Install ROS 2 Jazzy before building this project.
+
+Install required system packages:
+
+```bash
+sudo apt update
+sudo apt install python3-smbus i2c-tools
+```
+
+Check if the BMI160 sensor is visible on the I2C bus:
+
+```bash
+i2cdetect -y 1
+```
+
+Expected address:
+
+```text
+0x68 or 0x69
+```
+
+If the detected address is different from the one used in the Python code, update the `BMI160_ADDR` value in the IMU publisher file.
