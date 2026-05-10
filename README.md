@@ -3,9 +3,8 @@
 AcceleroSnake is a Snake game controlled by a real IMU sensor using ROS 2 communication on Raspberry Pi 5.
 
 The project combines:
-- modern C++ development,
+- C++ development,
 - ROS 2 publisher/subscriber architecture,
-- embedded systems,
 - I2C sensor communication,
 - accelerometer-based input control,
 - and basic terminal game development.
